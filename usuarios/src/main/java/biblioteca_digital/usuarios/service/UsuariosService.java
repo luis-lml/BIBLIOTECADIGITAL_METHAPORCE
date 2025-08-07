@@ -2,7 +2,6 @@ package biblioteca_digital.usuarios.service;
 
 import biblioteca_digital.usuarios.dto.UsuarioCreateDTO;
 import biblioteca_digital.usuarios.dto.UsuarioRequestDTO;
-import biblioteca_digital.usuarios.dto.UsuarioRequestDTO;
 import biblioteca_digital.usuarios.dto.UsuarioResponseDTO;
 import biblioteca_digital.usuarios.exception.EmailAlreadyExistsException;
 import biblioteca_digital.usuarios.model.Usuario;
