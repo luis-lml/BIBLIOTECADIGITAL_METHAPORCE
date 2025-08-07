@@ -1,0 +1,48 @@
+services:
+  mysql:
+    image: mysql:latest
+    container_name: MYSQL_DATABASE
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpass
+      - MYSQL_DATABASE=biblioteca_methaphorce
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-prootpass"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - biblioteca_methaphorce
+
+
+  gateway-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: GATEWAY_SERVICE
+    restart: on-failure
+    ports:
+      - "9000:9000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      spring_database_url: jdbc:mysql://mysql:3306/biblioteca_methaphorce
+      spring_database_username: root
+      spring_database_password: Corvus1234
+    networks:
+      - biblioteca_methaphorce  
+    volumes:
+    - ./logs:/logs  
+
+volumes:
+  mysql_data:
+
+networks:
+  biblioteca_methaphorce:
+    driver: bridge  
+
