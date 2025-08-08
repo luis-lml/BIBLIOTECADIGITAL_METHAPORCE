@@ -71,6 +71,7 @@ public class UsuariosService {
     public Optional<UsuarioResponseDTO> updateUser(Integer id, UsuarioRequestDTO requestDTO) {
         return usuariosRepository.findById(id)
                 .map(usuarioExistente -> {
+
                     usuarioExistente.setNombre(requestDTO.nombre());
                     usuarioExistente.setApellido(requestDTO.apellido());
                     usuarioExistente.setEmail(requestDTO.email());
