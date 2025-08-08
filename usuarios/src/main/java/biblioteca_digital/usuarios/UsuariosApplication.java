@@ -50,6 +50,7 @@ public class UsuariosApplication {
 						.requestMatchers(HttpMethod.GET, "/api/usuarios/**").hasRole("ADMIN")
 						.requestMatchers(HttpMethod.PUT, "/api/usuarios/**").hasRole("ADMIN")
 						.requestMatchers(HttpMethod.DELETE, "/api/usuarios/**").hasRole("ADMIN")
+
 						.anyRequest().authenticated() // Todas las demás peticiones requieren autenticación
 				)
 				.httpBasic(withDefaults());
